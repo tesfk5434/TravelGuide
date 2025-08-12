@@ -1,8 +1,7 @@
-import Header from '../../components/header/header'
 import './landingPage.css'
-
+import HeaderComponent from '../../components/header/header'
 export default function LandingPage(){
     return (
-        <Header/>
+        <HeaderComponent/>
     )
 }
