@@ -1,0 +1,14 @@
+.header-container{
+    background-color: white;
+    width: 100vw;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.header-title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 3em;
+    margin: 0;
+}
