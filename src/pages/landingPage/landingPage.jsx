@@ -5,9 +5,14 @@ export default function LandingPage(){
         <>
             <HeaderComponent/>
             <div className='content-container'>
-                <div className='content-title-container'>
+                <div className='content-middle-container'>
                     <h2 className='content-title' >Book your Vacations Plans with Ease</h2>
-                </div>   
+                    <p>Where You Headed?</p>
+                    <input></input>
+                    <div className='content-image-container'>
+
+                    </div>
+                </div>
             </div>
         </>
     )
