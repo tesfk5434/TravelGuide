@@ -1,20 +1,28 @@
-.header-container{
-    background-color: white;
-
-    width: 100vw;
-    height: auto;
-
+.content-container{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-content: center;
 
-    border-bottom: 0.1em solid black;
-}
-.header-title{
-    font-family: 'StylishFont', sans-serif;
-    font-weight: bold;
-    font-size: 4em;
+    width: 100vw;
+    height: 100vh;
     
-    margin: 0.5%;
+    margin: 0;
+    padding: 0 20px;
+}
+.content-title-container{
+    width: 30%;
+    height: auto;
+
+    margin-left: auto;
+    margin-right: auto;
+    
+
+}
+.content-title{
+    font-weight: bold;
+    font-size: 3em;
+
     text-align: center;
+    
 }
