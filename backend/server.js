@@ -1,15 +1,17 @@
 const express = require('express');
 const dotenv = require('dotenv').config({path:'../.env'});
-
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT;
 const apiKey = process.env.API_KEY;
 
 app.use(express.json());
-
-app.get('/locations', async (req, res) =>{
+app.use(cors());
+app.post('/locations', async (req, res) =>{
+    console.log(req.body);
     const {query} = req.body;
     try{
+        console.log(query);
         const googleResponse = await fetch('https://places.googleapis.com/v1/places:searchText',{
             method:'POST',
             headers:{
@@ -19,6 +21,7 @@ app.get('/locations', async (req, res) =>{
             },
             body: JSON.stringify({
                 "textQuery": query,
+                pageSize: 5,      
             })
         });
         const googleData = await googleResponse.json();
@@ -42,6 +45,7 @@ app.get('/locations', async (req, res) =>{
         }
     }
     catch(err){
+        console.log(err);
         res.status(500).json({
             status:'error',
             code:500,
