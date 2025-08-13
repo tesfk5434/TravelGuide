@@ -1,6 +1,15 @@
 import './landingPage.css'
 import HeaderComponent from '../../components/header/header'
+import Globe from 'react-globe.gl';
+import Map from '../../images/2979562.webp'
+import { useEffect, useRef } from 'react';
 export default function LandingPage(){
+    const globeEl = useRef();
+    useEffect( () =>{
+        const globeControl = globeEl.current.controls();
+        globeControl.autoRotate = true;
+        globeControl.autoRotateSpeed = 1;
+    }, [])
     return (
         <>
             <HeaderComponent/>
@@ -10,7 +19,7 @@ export default function LandingPage(){
                     <p>Where You Headed?</p>
                     <input></input>
                     <div className='content-image-container'>
-
+                        <Globe ref={globeEl} globeImageUrl={Map} backgroundColor='white' animateIn={false} height={400} width={400} atmosphereColor='black'/>
                     </div>
                 </div>
             </div>

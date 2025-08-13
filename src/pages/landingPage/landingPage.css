@@ -25,12 +25,11 @@
 }
 .content-image-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    align-content: center;
-}
-img{
-    
+    align-items: center;
+
+    height: 66vh;
 }
 input{
     width: 100%;
@@ -39,4 +38,10 @@ input{
     border-radius: 10px;
 
     margin: 0 auto;
+    font-size: 100%;
+    text-align: center;
+}
+p{
+    text-align: center;
+    text-shadow: 0.5px 0.5px ;
 }
