@@ -8,16 +8,15 @@ import hawaii from '../../images/hawaii.jpeg'
 import { useEffect, useRef, useState } from 'react';
 export default function LandingPage(){
     const [userSearch, setUserSearch] = useState('');
-    const [locations, setLocations] = useState([{}]);
+    const [locations, setLocations] = useState([]);
     const globeEl = useRef();
     useEffect( () =>{
         const globeControl = globeEl.current.controls();
         globeControl.autoRotate = true;
         globeControl.autoRotateSpeed = 1;
-    }, [])    
-    const onQueryChange = async (text) =>{
-        setUserSearch(text);
-        try{
+    }, [])
+    useEffect( () =>{
+        const timer = setTimeout(async () =>{
             if (userSearch !== ''){
                 const backendResponse = await fetch('http://localhost:3000/locations',{
                     method:'POST',
@@ -31,18 +30,14 @@ export default function LandingPage(){
                 const locationData = await backendResponse.json();
                 if (locationData.status === 'success'){
                     setLocations(locationData.data.locations);
-                    console.log(locations);
                 }
             }
             else{
                 setLocations([]);
             }
-        }
-        catch(err){
-            console.log(err);
-        }
-    }
-    
+        }, 500);
+        return () => clearTimeout(timer);
+    }, [userSearch])    
     return (
         <>
             <HeaderComponent/>
@@ -66,12 +61,14 @@ export default function LandingPage(){
                 <div className='content-middle-container'>
                     <h2 className='content-title' >Book your Vacations Plans with Ease</h2>
                     <p>Where You Headed?</p>
-                    <input onChange={(e) => onQueryChange(e.target.value)}></input>
-                    {locations.map((value, i) => (
-                        <p key={i}>{value.formattedAddress}</p>
+                    <input onChange={(e) => setUserSearch(e.target.value)}></input>
+                    <div className='locations-overlay'>
+                    {Array.isArray(locations) && locations.map((value, i) => (
+                        <p style={{borderBottom:"solid grey 2px",textAlign:'left', textShadow:'0 0'}} key={i}>{value.displayName.text}</p>
                     ))}
+                    </div>
                     <div className='content-image-container'>
-                        <Globe ref={globeEl} globeImageUrl={Map} backgroundColor='white' animateIn={false} height={400} width={400} atmosphereColor='black'/>
+                        <Globe ref={globeEl} globeImageUrl={Map} backgroundColor='white' animateIn={false} height={250} width={250} atmosphereColor='black'/>
                     </div>
                 </div>
                 <div className='content-side-container'>
